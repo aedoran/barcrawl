@@ -1,0 +1,25 @@
+.frame {
+  background-color:#ddd;
+  padding:5px;
+  margin:;
+  height:100%;
+}
+
+.options {
+  width: 150px;
+  float:left;
+  border-right: solid 1px #ccc;
+}
+
+.main {
+  width:100%
+}  
+
+.slider {
+  width:5px;
+  height:300px;
+  background-color:#aaa;
+  display:inline-block;
+  margin:5px;
+}
+
