@@ -1,8 +1,5 @@
 define(['/scripts/underscore.js'], function(_) {
 
-
-   console.log(_);
-
    var slider = function(args) {
      var min_args = ['id','parent','update_function'],
          el = document.createElement("div");

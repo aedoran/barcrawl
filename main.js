@@ -10,8 +10,14 @@ app.listen(80);
 app.use(express.static(__dirname + '/public'));
 
 var test = io.sockets.on('connection', function (socket) {
-    console.log("news sent");
-    socket.emit('news', { hello: 'world' });
+    setInterval(function() {
+      socket.emit('data', {
+       time   : (new Date()).getTime(),
+       value1 : 100*Math.random(), 
+       value2 : 100*Math.random(), 
+       value3 : 100*Math.random(), 
+      } );
+    },1000);
 });
 
 

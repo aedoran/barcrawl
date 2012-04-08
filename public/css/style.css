@@ -1,3 +1,7 @@
+body {
+  font-family: 'Electrolize', sans-serif;
+}
+
 .frame {
   background-color:#ddd;
   padding:5px;
@@ -6,7 +10,7 @@
 }
 
 .options {
-  width: 150px;
+  width: 250px;
   float:left;
   border-right: solid 1px #ccc;
 }
@@ -15,11 +19,51 @@
   width:100%
 }  
 
+
+/* slider stuff */
 .slider {
-  width:5px;
-  height:300px;
+  width:50px;
+  height:100px;
   background-color:#aaa;
   display:inline-block;
   margin:5px;
 }
 
+.chart {
+  border:1px solid #888;
+  width:400px;
+  height:100px;
+}
+
+
+.bar {
+  stroke:#ddd;
+  fill:darkgrey;
+}
+
+.accepted {
+  fill:grey;
+}
+.highlight {
+  fill:chocolate;
+}
+
+#props {
+  font-size : 10px;
+  font-weight: bold;
+  list-style-type : none;
+  color:chocolate;
+}
+
+
+.threshold {
+  stroke:#999;
+  stroke-width:1;
+  stroke-dasharray:3;
+}
+#list ul {
+  font-size:10px;
+  font-weight:bold;
+  color:#999;
+  list-style-type : none;
+}
