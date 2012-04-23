@@ -21,7 +21,7 @@ define(['/scripts/underscore.js'],function(_) {
       for (i in k) {
         var li_el = document.createElement("li");
         if (k[i] == "time") {
-          li_el.innerHTML = "time : " + Date(obj[k[i]]);
+          li_el.innerHTML = "time : " + (new Date(obj[k[i]]));
         } else {
           li_el.innerHTML = k[i] + " : " + obj[k[i]];
         }

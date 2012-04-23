@@ -1,11 +1,13 @@
-define(['/scripts/underscore.js'], function(_) {
+define(['/scripts/underscore.js','/scripts/helper.js'], 
+function(_,h) {
 
    var slider = function(args) {
      var min_args = ['id','parent','update_function'],
-         el = document.createElement("div");
+         el = h.makeEl("div");
     
      el.id = args.id;
 
+    this.args = {};
     var tracking = -1; 
     var getValueFromOffset = function(y) {
       return Math.round(100*(el.offsetHeight-y)/el.offsetHeight); 
@@ -18,24 +20,22 @@ define(['/scripts/underscore.js'], function(_) {
       }
       if (tracking > -1) {
         this.value = getValueFromOffset(e.offsetY);
-        args.update_function(this.value);
+        args.update_function(this.value,args.prop_id);
       } 
     }
-    el.addEventListener("mousedown",function(e) {
-       console.log("d");
+    h.addEvent(el,"mousedown",function(e) {
        track(1,e);
     });
-    el.addEventListener("mousemove",function(e) {
+    h.addEvent(el,"mousemove",function(e) {
        track(0,e);
     });
-    el.addEventListener("mouseup",function(e) {
-       console.log("u");
+    h.addEvent(el,"mouseup",function(e) {
        track(-1,e);
     });
 
+    h.addClass(el,"slider");
     el.setAttribute("class","slider");
-
-    args.parent.appendChild(el);
+    h.getEl(args.parent).appendChild(el);
  
    }
 
