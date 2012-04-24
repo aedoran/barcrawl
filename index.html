@@ -7,12 +7,32 @@
 
   <body>
     <div class="options frame">
+      <h2>Object Info:</h2>
       <div id="info_container"></div>
+      <h2>Accepted List:</h2>
+      <p>Click a list item to  examine its properties</p>
       <div id="list"></div>
     </div>
     <div class="main frame">
-      <div id="props">
-      </div>
+      <h2>Attributes of Objects:</h2>
+      <p>Drag bars to control objects that appear in the "accepted list"</p>
+      <div id="props"></div>
+      <p>This is a graph debugging tool examine your objects as they are being created. 
+      Built with d3, requirejs and socket.io.  I like leaving to let the client render 
+      the everything about the view, and the server just pushes the object over a socket.
+      On the first push of the object, the client inspects the attributes to determine
+      which values are numeric attributes and makes bargraphs for each of them.  After
+      that the graph just redraws the when the object is pushed to the client.
+      rendering of the graph is done with svg's through d3, which allows for styling the 
+      graph through css and attaching mouseevents.</p>
+      <p>
+      The barcrawl has the following interactions.  Attribute bars above and below the 
+      threshold take a different color.  On the mouseover of a bar the the bar takes a color
+      and the object info is populated.  The list of objects are all the objects that have 
+      each numeric property above the respective threshold. Only the main_property is 
+      displayed which is parameter.When clicking on a list item the object info gets displayed 
+      as well as the the bars for each its properties get highlighted.
+      </p>
     </div>
   </body>
 
