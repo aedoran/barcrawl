@@ -2,8 +2,7 @@ var io            = require('socket.io'),
     fs            = require('fs'),
     express       = require('express'),
     stock         = require(__dirname + '/streams/stock'),
-    teststream    = require(__dirname + '/streams/test'),
-    twitter       = require(__dirname + '/streams/twitter');
+    teststream    = require(__dirname + '/streams/test');
 
 var app = express.createServer()
   , io = io.listen(app);
