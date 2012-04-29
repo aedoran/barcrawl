@@ -12,6 +12,7 @@ var teststream = function(args) {
          value1 : 50*Math.sin((new Date()).getTime()/1000)+50, 
          value2 : 100*Math.random(), 
          value3 : 50*Math.sin((new Date()).getTime()/2500)+50, 
+         value4 : 12*Math.random(),
          text   : "yo"
        });
       c = c +1;
