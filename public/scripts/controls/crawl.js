@@ -91,7 +91,7 @@ define([
 
 
     //Bar Moving Logic
-    var el = document.querySelector("#"+params.id+" line");
+    var el = helper.getEl("#"+params.id+" line");
 
     var that = this;
     var tracking = -1; 
@@ -121,7 +121,7 @@ define([
     helper.addEvent(el,"mousedown",function(e) {
        track(1,e);
     });
-    helper.addEvent(document.querySelector("#"+params.id),"mousemove",function(e) {
+    helper.addEvent(helper.getEl("#"+params.id),"mousemove",function(e) {
        track(0,e);
     });
     helper.addEvent(el,"mouseup",function(e) {
@@ -214,7 +214,7 @@ define([
 
 
     this.highlight = function(obj) {
-      var bars = document.querySelectorAll("#"+params.id+" .bar");
+      var bars = helper.getAllEl("#"+params.id+" .bar");
       var str = JSON.stringify(obj);
       for (var i=0; i<bars.length; i++) {
 

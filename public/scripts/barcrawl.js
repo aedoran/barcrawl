@@ -96,14 +96,14 @@ define(
     //object info view
     var inf = info.create({
       "id":"info",
-      "parent":document.querySelector("#info_container")
+      "parent":h.getEl("#info_container")
     });
 
 
     //list element view
     var li = list.create({
       "id": "listId",
-      "parent":document.querySelector("#list"),
+      "parent":h.getEl("#list"),
       "main_property":main_property,
       "mouseover":function(o) {
         for (i in props) { props[i].highlight(o); }
