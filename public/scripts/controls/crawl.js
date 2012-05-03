@@ -5,16 +5,12 @@ define([
     ], function(_,d3,helper) {
 
   var crawl = function(args) {
-    var min_args = ['id','parent','property'];
-
-    var params = args;
-
-    //evaluated height cutoff
-    var cutoff = args.cutoff ? args.cutoff : Math.floor(params.max/4);
-
-    var accepted = [];
-
-    var highlight = "none";
+    var min_args  = ['id','parent','property'],
+        params    = args,
+        cutoff    = args.cutoff ? args.cutoff : Math.floor(args.max/4),
+        accepted  = [],
+        highlight = "none";
+        
     
     this.data = params.data;
 
@@ -28,13 +24,15 @@ define([
     //get the height of bars from stylesheet
     var width = "100";
     var height = "20";
+    //needs a fix
+    //make it not dependent on being the first stylesheet of the document
     var rl = document.styleSheets[0].cssRules;
     for (var i in rl) {
       if (rl[i].selectorText == ".chart") {
         width = rl[i].style.width.replace("px","");
         height = rl[i].style.height.replace("px","");
       }
-    } 
+    }
 
     //bar width and height
     var w = width/params.num_of_bars, h = height;
@@ -67,11 +65,7 @@ define([
       .attr("class","bar")
 
     var initial_cutoff_pos = h-(h*cutoff/params.max);
-    console.log(params.max);
-    console.log(cutoff);
-    console.log(h);
-    console.log(initial_cutoff_pos);
-    console.log(w);
+    
     //cut off line
     chart.insert("svg:line")
       .attr("x1","0")
@@ -96,13 +90,14 @@ define([
       .text(params.property);
 
 
+    //Bar Moving Logic
     var el = document.querySelector("#"+params.id+" line");
 
+    var that = this;
     var tracking = -1; 
     var getValueFromOffset = function(y) {
       return Math.round(params.max*(h-y)/h); 
     } 
-    var that = this;
     var track = function(start,e) {
       if (start == 1 ) {
         tracking = 1;
@@ -113,6 +108,16 @@ define([
         that.updateCutoff(e.offsetY,getValueFromOffset(e.offsetY));
       } 
     }
+
+    var updateCutoff = function(pos,val) {
+      cutoff = val;
+
+      chart.select("text").attr("y",pos).text(val);
+      chart.select("line")
+        .attr("y1",pos)
+        .attr("y2",pos)
+    }
+
     helper.addEvent(el,"mousedown",function(e) {
        track(1,e);
     });
@@ -123,26 +128,27 @@ define([
        track(-1,e);
     });
 
-   // add events
-   if (typeof params.barmouseover == 'function') {
-   
-     var cont_el = helper.getEl("#"+params.id);
-     helper.addEvent(cont_el,'mouseover',function(e) {
+
+    // add events
+    if (typeof params.barmouseover == 'function') {
+
+      var cont_el = helper.getEl("#"+params.id);
+      helper.addEvent(cont_el,'mouseover',function(e) {
        
-       if (helper.hasClass(e.target,"bar")) {
-         var bars = helper.getAllEl("#"+params.id+' .bar');
-         for (var i in bars) {
+        if (helper.hasClass(e.target,"bar")) {
+          var bars = helper.getAllEl("#"+params.id+' .bar');
+          for (var i in bars) {
            if (bars[i].getAttribute) {
              helper.remClass(bars[i],"highlight");
            }
-         }
+          }
 
-         helper.addClass(e.target,"highlight");
+          helper.addClass(e.target,"highlight");
 
-         params.barmouseover(JSON.parse(e.target.getAttribute("d")),args.prop_id);
-       }
-     });
-  }
+          params.barmouseover(JSON.parse(e.target.getAttribute("d")),args.prop_id);
+        }
+      });
+    }
 
 
    this.redraw = function() {
@@ -196,14 +202,6 @@ define([
 
     rect.exit().remove();
 
-    var updateCutoff = function(pos,val) {
-      cutoff = val;
-
-    chart.select("text").attr("y",pos).text(val);
-    chart.select("line")
-      .attr("y1",pos)
-      .attr("y2",pos)
-    }
 
     this.updateCutoff = updateCutoff;
     

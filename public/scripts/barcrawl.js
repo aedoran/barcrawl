@@ -33,7 +33,8 @@ define(
         //values above the slider
         li.update(
           _.intersection.apply(
-          null,_.map(props, function(p) { return p.getAccepted()})
+            null,
+            _.map(props, function(p) { return p.getAccepted()})
           )
         );
     };
@@ -45,21 +46,18 @@ define(
       //get the numbered properties
       var keys = _.keys(d);
       var obj = {};
-      for (var i in keys) { 
+      for (var i in keys) {
         //construct empty data
         if (h.isNumber(d[keys[i]])) {
           obj[keys[i]] = 0;
         }
       }
 
-
-
       //initialize data with some empty values so that crawlers can render
       for (var i=0;i<args.num_of_bars;i++) { data.push(obj) }
 
 
       //build slider and crawler
-      var func;
       for (var i in keys) {
         var k = keys[i];
         //make bar crawls for:
@@ -74,17 +72,6 @@ define(
           //needs to be set for the list view
           if (main_property == "none") { li.updateMainProperty(k); }
 
-
-          //slider
-      /*    sl.create({
-            id : "slider_"+keys[i],
-            parent : "#props",
-            prop_id: props.length,
-            update_function : function(y,i) {
-              console.log(i);
-              props[i].updateCutoff(y);
-            }
-          }); */
 
           //crawler
           var crawl = c.create({
@@ -109,13 +96,13 @@ define(
     //object info view
     var inf = info.create({
       "id":"info",
-      "parent":document.querySelector("#info_container"),
+      "parent":document.querySelector("#info_container")
     });
 
 
     //list element view
     var li = list.create({
-      "id": "bla",
+      "id": "listId",
       "parent":document.querySelector("#list"),
       "main_property":main_property,
       "mouseover":function(o) {
@@ -134,8 +121,6 @@ define(
       return new barcrawl(args);
     }
   }
-
- 
 
 
 });
