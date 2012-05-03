@@ -1,16 +1,16 @@
-define(['/scripts/underscore.js'],function(_) {
+define(['/scripts/underscore.js','/scripts/helper.js'],function(_,h) {
 
   var info = function(args) {
     var min_args = ['id','parent'];
     
-    var el = document.createElement("div");
+    var el = h.makeEl("div");
     el.id = args.id;
     args.parent.appendChild(el);
 
   
     this.set = function(obj) {
       var prop_el = el.querySelector("#props"),
-          props   = document.createElement("ul");
+          props   = h.makeEl("ul");
 
       if (prop_el) { el.removeChild(prop_el) }
       
@@ -19,7 +19,7 @@ define(['/scripts/underscore.js'],function(_) {
 
       var k = _.keys(obj);
       for (i in k) {
-        var li_el = document.createElement("li");
+        var li_el = h.makeEl("li");
         if (k[i] == "time") {
           li_el.innerHTML = "time : " + (new Date(obj[k[i]]));
         } else {

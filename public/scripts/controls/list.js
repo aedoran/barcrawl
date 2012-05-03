@@ -1,9 +1,9 @@
-define(['/scripts/underscore.js'],function(_) {
+define(['/scripts/underscore.js','/scripts/helper.js'],function(_,h) {
 
   var list = function(args) {
     var min_args = ['id','parent','main_property'];
 
-    var el = document.createElement("div");
+    var el = h.makeEl("div");
     el.id = args.id;
     args.parent.appendChild(el);
     var highlight = "none";
@@ -12,7 +12,7 @@ define(['/scripts/underscore.js'],function(_) {
     el.addEventListener("click",function(e) {
 
       if (e.target.tagName = "LI") {
-        var lis = document.querySelectorAll("#"+el.id+" li");
+        var lis = h.getAllEl("#"+el.id+" li");
         for (var i=0; i<lis.length; i++) {
           lis[i].setAttribute("class",
             lis[i].getAttribute("class").replace("highlight",""))
@@ -31,14 +31,14 @@ define(['/scripts/underscore.js'],function(_) {
 
     this.update = function(list) {
       var item_el = el.querySelector("#items"),
-          items   = document.createElement("ul");
+          items   = h.makeEl("ul");
 
       if (item_el) { el.removeChild(item_el) }
       
 
       items.id = "items";
       for (var i=list.length-1;i>=0;i--) {
-        var li_el = document.createElement("li");
+        var li_el = h.makeEl("li");
         var str = JSON.stringify(list[i]);
         li_el.innerHTML = that.main_property+":"+list[i][that.main_property];
         if (str == highlight) {
